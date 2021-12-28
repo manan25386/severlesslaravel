@@ -22,9 +22,12 @@ functions:
     # This function runs the Laravel website/API
     web:
         handler: public/index.php
+        environment:
+            ODBCSYSINI: /opt/microsoft/conf/
         timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
         layers:
             - ${bref:layer.php-80-fpm}
+            - ${bref-extra:sqlsrv-php-80}
         events:
             - httpApi: '*'
     # This function lets us run artisan commands in Lambda
@@ -34,7 +37,10 @@ functions:
         layers:
             - ${bref:layer.php-80} # PHP
             - ${bref:layer.console} # The "console" layer
+            - ${bref-extra:sqlsrv-php-80}
+
 
 plugins:
     # We need to include the Bref plugin
     - ./vendor/bref/bref
+    - ./vendor/bref/extra-php-extensions # <----- Add the extra Serverless plugin

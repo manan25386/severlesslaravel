@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/artist', function () {
+Route::get('v1/artist', function () {
     return 'welcome artist';
 });
