@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json(array('message'=> 'Invalid request.'));
 });
 
 Route::get('v1/artist', function () {
